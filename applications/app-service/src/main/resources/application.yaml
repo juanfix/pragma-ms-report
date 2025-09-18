@@ -1,0 +1,45 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: "report"
+  webflux:
+    base-path: "/"
+  devtools:
+    livereload:
+      enabled: false
+  profiles:
+    active: "local"
+logging:
+  level:
+    co.com.pragma: "DEBUG"
+    org.springframework.web: "DEBUG"
+springdoc:
+  api-docs:
+    path: "/v3/api-docs"
+  swagger-ui:
+    path: "/swagger-ui.html"
+    enabled: true
+routes:
+  paths:
+    global: "/api/v1"
+aws:
+  dynamodb:
+    endpoint: "${AWS_DYNAMO_DB_ENDPOINT:https://dynamodb.us-east-1.amazonaws.com}"
+    accessKey: "${AWS_ACCESS_KEY:any}"
+    secretKey: "${AWS_SECRET_KEY:any}"
+  region: "${AWS_REGION:us-east-1}"
+adapter:
+  sqs:
+    region: "us-east-1"
+    queueUrl: "${SQS_SENDER_URL:https://sqs.us-east-1.amazonaws.com/225685253174/sqs_report_sender_to_ms}"
+    # endpoint: "http://localhost:4566 # For localstack only"
+entrypoint:
+  sqs:
+    region: "us-east-1"
+    # endpoint: "http://localhost:4566"
+    queueUrl: "${SQS_LISTENER_URL:https://sqs.us-east-1.amazonaws.com/225685253174/sqs_update_report}"
+    waitTimeSeconds: 20
+    maxNumberOfMessages: 10
+    visibilityTimeoutSeconds: 10
+    numberOfThreads: 1
