@@ -5,14 +5,14 @@ import co.com.pragma.api.report.dto.UnauthorizedDTO;
 import co.com.pragma.model.report.Report;
 import co.com.pragma.usecase.report.ReportUseCase;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,6 +59,8 @@ public class Handler {
                                     schema = @Schema(implementation = InternalErrorResponseDTO.class)))
             }
     )
+    @SecurityRequirement(name = "Authorization")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public Mono<ServerResponse> listenGetReports(ServerRequest serverRequest) {
         return reportUseCase.getTotalAmount()
                 .flatMap(response -> ServerResponse.ok()

@@ -15,6 +15,7 @@ import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional;
 import software.amazon.awssdk.enhanced.dynamodb.model.QueryEnhancedRequest;
 import software.amazon.awssdk.services.dynamodb.model.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -109,6 +110,8 @@ public class DynamoDBTemplateAdapter extends TemplateAdapterOperations<Report, S
                         .id(REPORT_ID)
                         .count(Long.parseLong(attrs.getOrDefault("count", AttributeValue.builder().n("0").build()).n()))
                         .totalAmount(Double.parseDouble(attrs.getOrDefault("totalAmount", AttributeValue.builder().n("0").build()).n()))
+                        .createdAt(LocalDateTime.parse(attrs.getOrDefault("createdAt", AttributeValue.builder().n("0").build()).s()))
+                        .updatedAt(LocalDateTime.parse(attrs.getOrDefault("updatedAt", AttributeValue.builder().n("0").build()).s()))
                         .build());
     }
 

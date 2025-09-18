@@ -1,0 +1,18 @@
+services:
+  ms-report:
+    build:
+      context: .
+      dockerfile: deployment/Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: ${AWS_REGION}
+      APP_SECRET_KEY: ${APP_SECRET_KEY}
+      APP_EXP_TIME: ${APP_EXP_TIME}
+    networks:
+      - pragma_prod
+
+networks:
+  pragma_prod: # se debe crear la red externa para conectar los micros
+    external: true

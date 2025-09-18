@@ -1,0 +1,4 @@
+services:
+  ms-report:
+    ports:
+      - "8092:8082"   # se expone en el host en 8091
