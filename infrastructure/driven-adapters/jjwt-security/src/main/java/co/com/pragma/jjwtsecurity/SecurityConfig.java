@@ -54,7 +54,8 @@ public class SecurityConfig {
                                         "/v3/api-docs/**",
                                         "/v2/api-docs/**",
                                         "/swagger-resources/**",
-                                        "/configuration/**"
+                                        "/configuration/**",
+                                        "/actuator/**"
                                 ).permitAll()
                                 .anyExchange().authenticated())
                 .addFilterAfter(jwtFilter, SecurityWebFiltersOrder.FIRST)
