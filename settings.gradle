@@ -32,3 +32,7 @@ include ':sqs-listener'
 project(':sqs-listener').projectDir = file('./infrastructure/entry-points/sqs-listener')
 include ':jjwt-security'
 project(':jjwt-security').projectDir = file('./infrastructure/driven-adapters/jjwt-security')
+include ':scheduler-task'
+project(':scheduler-task').projectDir = file('./infrastructure/entry-points/scheduler-task')
+include ':web-client'
+project(':web-client').projectDir = file('./infrastructure/driven-adapters/web-client')

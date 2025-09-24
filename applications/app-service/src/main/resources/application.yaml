@@ -32,7 +32,7 @@ aws:
 adapter:
   sqs:
     region: "us-east-1"
-    queueUrl: "${SQS_SENDER_URL:https://sqs.us-east-1.amazonaws.com/225685253174/sqs_report_sender_to_ms}"
+    queueUrl: "${SQS_SENDER_EMAIL_QUEUE_URL:https://sqs.us-east-1.amazonaws.com/225685253174/sqs_email_sender_to_ses}"
     # endpoint: "http://localhost:4566 # For localstack only"
 ms-authentication:
   base-url: "${AUTHENTICATION_BASE_URL:http://localhost:8080}"
